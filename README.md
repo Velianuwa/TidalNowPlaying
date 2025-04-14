@@ -69,9 +69,51 @@ Se preferir compilar o aplicativo você mesmo:
     ```
     O resultado estará em `bin/Release/net8.0-windows/win-x64/publish/`.
 
+### 🔒 Verificação de Integridade e Autenticidade
+
+Você pode verificar se o arquivo `.exe` baixado é autêntico e não foi corrompido:
+
+#### ✔️ Passo 1: Baixe os arquivos
+
+Além do `TidalNowPlaying.exe`, baixe também os arquivos:
+
+- `TidalNowPlaying.exe.sha256`
+- `TidalNowPlaying.exe.sha256.asc`
+- `miguelmachado-pubkey.asc`
+
+#### ✔️ Passo 2: Instale o GPG
+
+Caso ainda não tenha, instale o [Gpg4win](https://gpg4win.org/) para usar o GPG no Windows.
+
+#### ✔️ Passo 3: Importe a chave pública
+
+```powershell
+gpg --import .\miguelmachado-pubkey.asc
+```
+
+#### ✔️ Passo 4: Verifique a assinatura da hash
+
+```powershell
+gpg --verify .\TidalNowPlaying.exe.sha256.asc .\TidalNowPlaying.exe.sha256
+```
+
+A saída deve conter:
+
+```
+gpg: Boa assinatura de "Miguel Machado <hello@miguelmachado.dev>"
+```
+
+#### ✔️ Passo 5: Verifique o hash do executável
+
+```powershell
+Get-FileHash .\TidalNowPlaying.exe -Algorithm SHA256
+```
+
+Compare com o conteúdo de `TidalNowPlaying.exe.sha256`. Os valores devem ser idênticos.
+
 ### 📄 Licença
 
-Este projeto é distribuído sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes. *(Nota: Você precisará adicionar um arquivo chamado LICENSE contendo o texto da licença MIT se quiser usar esta linha)*.
+Este projeto é distribuído sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
@@ -140,6 +182,48 @@ If you prefer to build the application yourself:
     ```
     The result will be in `bin/Release/net8.0-windows/win-x64/publish/`.
 
+### 🔒 Integrity and Authenticity Verification
+
+You can verify that the `.exe` file is authentic and has not been tampered with:
+
+#### ✔️ Step 1: Download the verification files
+
+Alongside `TidalNowPlaying.exe`, also download:
+
+- `TidalNowPlaying.exe.sha256`
+- `TidalNowPlaying.exe.sha256.asc`
+- `miguelmachado-pubkey.asc`
+
+#### ✔️ Step 2: Install GPG
+
+If you don’t have it yet, install [Gpg4win](https://gpg4win.org/) to use GPG on Windows.
+
+#### ✔️ Step 3: Import the public key
+
+```powershell
+gpg --import .\miguelmachado-pubkey.asc
+```
+
+#### ✔️ Step 4: Verify the signature
+
+```powershell
+gpg --verify .\TidalNowPlaying.exe.sha256.asc .\TidalNowPlaying.exe.sha256
+```
+
+You should see:
+
+```
+gpg: Good signature from "Miguel Machado <hello@miguelmachado.dev>"
+```
+
+#### ✔️ Step 5: Verify the `.exe` checksum
+
+```powershell
+Get-FileHash .\TidalNowPlaying.exe -Algorithm SHA256
+```
+
+Compare the output with the value in `TidalNowPlaying.exe.sha256`. They should match exactly.
+
 ### 📄 License
 
-This project is distributed under the MIT License. See the [LICENSE](LICENSE) file for more details. *(Note: You will need to add a file named LICENSE containing the MIT license text if you want to use this line)*.
+This project is distributed under the MIT License. See the [LICENSE](LICENSE) file for more details.
