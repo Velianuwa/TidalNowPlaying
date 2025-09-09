@@ -117,7 +117,7 @@ namespace TidalNowPlaying
 
             if (!string.IsNullOrEmpty(songInfo))
             {
-                string formatted = $"Current Song: {songInfo}";
+                string formatted = $"Current Song: {songInfo}        ";
                 try
                 {
                     string appDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TidalNowPlaying");
